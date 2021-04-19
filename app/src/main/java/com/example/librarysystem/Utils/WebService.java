@@ -1,13 +1,8 @@
 package com.example.librarysystem.Utils;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-
-import com.example.librarysystem.HomePage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +12,6 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
@@ -147,8 +141,8 @@ public class WebService {
      * book
      **/
 
-    public static void book(final HomePage res, String authorId, String availableCopies, String bookCategory, ProgressDialog bookEdition, String bookTitle,
-                            String boolPublisher, String isbn, String numOfCopies, final String progressDialog, final Context context) {
+    public static void book(final ResponseHandler res, String authorId, String availableCopies, String bookCategory, String bookEdition, String bookTitle,
+                            String boolPublisher, String isbn, String numOfCopies, final ProgressDialog progressDialog, final Context context) {
 
 
         OkHttpClient client = new OkHttpClient();

@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 public class Util {
-    public static final String PREFS_NAME ="MyPrefsFile";
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     public static void showDialog(final Context context, final String title, final String msg) {
         Handler h = new Handler(Looper.getMainLooper());

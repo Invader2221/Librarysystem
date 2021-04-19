@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/itemOne"
+            android:icon="@drawable/abc_vector_test"
+            android:title="Frag One" />
+        <item
+            android:id="@+id/itemTwo"
+            android:icon="@drawable/ic_search"
+            android:title="Frag Two" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/black_blur_background"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>

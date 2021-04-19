@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LibrarySystem"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".MainActivity" />
         <activity android:name=".Signup" />
         <activity android:name=".Login">
             <intent-filter>
@@ -21,9 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HomePage"/>
-<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.example.librarysystem;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.librarysystem.Utils.ResponseHandler;
@@ -72,7 +70,7 @@ public class Login extends AppCompatActivity implements ResponseHandler {
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         if (settings.getBoolean("USER_LOGGED", false)) {
-            Intent intent = new Intent(Login.this, HomePage.class);
+            Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
             Login.this.finish();
         }
@@ -98,26 +96,6 @@ public class Login extends AppCompatActivity implements ResponseHandler {
                     e.printStackTrace();
                 }
 
-//                String enteredPassword = passField.getEditableText().toString();
-
-
-//        btn_login1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                a = passField1.getText().toString();
-//
-//            }
-//        });
-
-//        passField.setOnContextClickListener(new View.OnContextClickListener() {
-//            @Override
-//            public boolean onContextClick(View view) {
-//                a = passField.getText().toString();
-//                return false;
-//            }
-//        });
-
                 if (progressDialog != null) {
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
@@ -132,7 +110,7 @@ public class Login extends AppCompatActivity implements ResponseHandler {
                 } else if (password1.equals(passField.getEditableText().toString())) {
                     Toast.makeText(Login.this, "Successful login", Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(Login.this, HomePage.class);
+                    Intent intent = new Intent(Login.this, MainActivity.class);
                     SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putBoolean("USER_LOGGED", true);
                     editor.apply();
