@@ -147,8 +147,8 @@ public class WebService {
      * book
      **/
 
-    public static void book(final HomePage res, String authorId, String availableCopies, String bookCategory, ProgressDialog bookEdition, String bookTitle
-            , String boolPublisher, String isbn, String numOfCopies, final String progressDialog, final Context context) {
+    public static void book(final HomePage res, String authorId, String availableCopies, String bookCategory, ProgressDialog bookEdition, String bookTitle,
+                            String boolPublisher, String isbn, String numOfCopies, final String progressDialog, final Context context) {
 
 
         OkHttpClient client = new OkHttpClient();
@@ -173,8 +173,8 @@ public class WebService {
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(LIBRARY_URL + "books")
-                .get()
+                .url(BASE_URL + "books/get")
+                .post(body)
                 .build();
 
 
@@ -183,34 +183,26 @@ public class WebService {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e("HttpService", "onFailure() Request was: " + request);
                 e.printStackTrace();
-
-//                Log.e("HttpService", "onFailure() Request was: " + request);
-//                e.printStackTrace();
-//                progressDialog.dismiss();
-//                Util.showDialog(context, "Error!", networkError);
+                progressDialog.dismiss();
+                Util.showDialog(context, "Error!", networkError);
             }
 
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
-
-                if (response.isSuccessful()){
-                    String bookRespone = response.body().string();
-
+                try {
+                    String jsonData = response.body().string();
+                    JSONObject Jobject = new JSONObject(jsonData);
+                    res.serviceResponse(Jobject, jsonData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    progressDialog.dismiss();
+                    Util.showDialog(context, "Error!", serviceError);
                 }
-
-//                try {
-//                    String jsonData = response.body().string();
-//                    JSONObject Jobject = new JSONObject(jsonData);
-//                    res.serviceResponse(Jobject, "");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    progressDialog.dismiss();
-//                    Util.showDialog(context, "Error!", serviceError);
-//                }
             }
         });
+
     }
 
 
