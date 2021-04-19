@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomePage"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".HomePage"/>
+<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
     </application>
 
 </manifest>

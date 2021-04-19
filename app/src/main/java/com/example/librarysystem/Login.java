@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity implements ResponseHandler {
     String userName, password;
     TextView registerText;
     EditText userField, passField, passField1;
-    Button btn_login, btn_login1;
+    Button btn_login;
     private ProgressDialog progressDialog;
 
     @Override

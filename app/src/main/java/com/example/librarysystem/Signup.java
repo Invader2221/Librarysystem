@@ -69,7 +69,7 @@ public class Signup extends AppCompatActivity implements ResponseHandler {
                     Util.showDialog(Signup.this, "Error!", "Please enter password!");
                 } else {
                     progressDialog = ProgressDialog.show(Signup.this, "Please wait...", "Retrieving data ...", true);
-                    WebService.register(Signup.this, email, password, String.valueOf(radioButton.getText()), userName, progressDialog, Signup.this);
+                    WebService.sigup(Signup.this, email, password, String.valueOf(radioButton.getText()), userName, progressDialog, Signup.this);
 
                 }
 

@@ -6,30 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".HomePage">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"/>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        -->
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/black"/>-->
+<!--    </LinearLayout>-->
 
 
-    <Button
-    android:id="@+id/home_logout_btn"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/login_password_input"
-    android:layout_marginLeft="15dp"
-    android:layout_marginTop="100dp"
-    android:layout_marginRight="15dp"
-    android:background="@drawable/login_button"
-    android:onClick="btnlogin_Click"
-    android:padding="17dp"
-    android:text="logout"
-    android:textAllCaps="false"
-    android:textColor="@android:color/white"
-    android:textSize="20dp"
-    android:textStyle="bold"
-    tools:ignore="OnClick" />
+         <ListView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/list_view"
+             android:dividerHeight="2dp"
+             android:divider="@android:color/white"
+             tools:listitem="@android:layout/simple_list_item_1"/>
+
+
+
+<!--    <Button-->
+<!--    android:id="@+id/home_logout_btn"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_below="@+id/login_password_input"-->
+<!--    android:layout_marginLeft="15dp"-->
+<!--    android:layout_marginTop="100dp"-->
+<!--    android:layout_marginRight="15dp"-->
+<!--    android:background="@drawable/login_button"-->
+<!--    android:onClick="btnlogin_Click"-->
+<!--    android:padding="17dp"-->
+<!--    android:text="logout"-->
+<!--    android:textAllCaps="false"-->
+<!--    android:textColor="@android:color/white"-->
+<!--    android:textSize="20dp"-->
+<!--    android:textStyle="bold"-->
+<!--    tools:ignore="OnClick" />-->
 
 
 </RelativeLayout>

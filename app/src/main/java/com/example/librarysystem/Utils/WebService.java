@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.example.librarysystem.HomePage;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,7 +86,10 @@ public class WebService {
     }
 
 
-    public static void register(final ResponseHandler res, String email, String password, String role, String userName, final ProgressDialog progressDialog, final Context context) {
+    /**
+     * User Signup Method
+     **/
+    public static void sigup(final ResponseHandler res, String email, String password, String role, String userName, final ProgressDialog progressDialog, final Context context) {
 
 
         OkHttpClient client = new OkHttpClient();
@@ -136,5 +141,77 @@ public class WebService {
         });
 
     }
+
+
+    /**
+     * book
+     **/
+
+    public static void book(final HomePage res, String authorId, String availableCopies, String bookCategory, ProgressDialog bookEdition, String bookTitle
+            , String boolPublisher, String isbn, String numOfCopies, final String progressDialog, final Context context) {
+
+
+        OkHttpClient client = new OkHttpClient();
+
+        final MediaType JSON
+                = MediaType.get("application/json; charset=utf-8");
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("authorId", authorId);
+            jsonObject.put("availableCopies", availableCopies);
+            jsonObject.put("bookCategory", bookCategory);
+            jsonObject.put("bookEdition", bookEdition);
+            jsonObject.put("bookTitle", bookTitle);
+            jsonObject.put("boolPublisher", boolPublisher);
+            jsonObject.put("isbn", isbn);
+            jsonObject.put("numOfCopies", numOfCopies);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(LIBRARY_URL + "books")
+                .get()
+                .build();
+
+
+        Call call = client.newCall(request);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                e.printStackTrace();
+
+//                Log.e("HttpService", "onFailure() Request was: " + request);
+//                e.printStackTrace();
+//                progressDialog.dismiss();
+//                Util.showDialog(context, "Error!", networkError);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+
+                if (response.isSuccessful()){
+                    String bookRespone = response.body().string();
+
+                }
+
+//                try {
+//                    String jsonData = response.body().string();
+//                    JSONObject Jobject = new JSONObject(jsonData);
+//                    res.serviceResponse(Jobject, "");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    progressDialog.dismiss();
+//                    Util.showDialog(context, "Error!", serviceError);
+//                }
+            }
+        });
+    }
+
 
 }

@@ -1,41 +1,144 @@
 package com.example.librarysystem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.example.librarysystem.Utils.Util;
+import com.example.librarysystem.Utils.WebService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 import static com.example.librarysystem.Utils.Util.PREFS_NAME;
 
 public class HomePage extends AppCompatActivity {
 
-
+    String authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies;
     Button logOutButton;
+    ListView listView;
+    ArrayList<String> stringArrayList = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        logOutButton = (Button) findViewById(R.id.home_logout_btn);
+        listView = (ListView) findViewById(R.id.list_view);
 
-        logOutButton.setOnClickListener(new View.OnClickListener() {
+        for (int i = 0; i <= 100; i++) {
+            stringArrayList.add("Item " + i);
+        }
+
+        adapter = new ArrayAdapter<>(HomePage.this, android.R.layout.simple_list_item_1, stringArrayList);
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, Login.class);
-                SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putBoolean("USER_LOGGED", false);
-                editor.apply();
-                startActivity(intent);
-                HomePage.this.finish();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Toast.makeText(getApplicationContext()
+                        , adapter.getItem(position), Toast.LENGTH_SHORT).show();
+
+                progressDialog = ProgressDialog.show(HomePage.this, "Please wait...", "Retrieving data ...", true);
+                WebService.book(HomePage.this, authorId, availableCopies, bookCategory,  progressDialog, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies, HomePage.this);
             }
         });
 
+
+//        logOutButton = (Button) findViewById(R.id.home_logout_btn);
+//
+//        logOutButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(HomePage.this, Login.class);
+//                SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+//                editor.putBoolean("USER_LOGGED", false);
+//                editor.apply();
+//                startActivity(intent);
+//                HomePage.this.finish();
+//
+//            }
+//        });
+
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_view);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String quary) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+//    @Override
+//    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
+//
+//        boolean result = response.getBoolean("result");
+//
+//        String message = response.get("message").toString();
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                if (progressDialog != null) {
+//                    if (progressDialog.isShowing()) {
+//                        progressDialog.dismiss();
+//                    }
+//                }
+//
+//                if (!result) {
+//                    Util.showDialog(HomePage.this, "Error!", message);
+//                } else {
+//                    Toast.makeText(HomePage.this, message, Toast.LENGTH_LONG).show();
+//                    startActivity(new Intent(HomePage.this, Login.class));
+//                }
+//
+//            }
+//        });
+//
+//    }
+
 }
