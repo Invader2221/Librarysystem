@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_container, fragment);
                         ft.commitAllowingStateLoss();
-                        setTitle("Frag One");
+                        setTitle("Library System");
                         dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.itemTwo:
@@ -62,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
                         FragmentTransaction ftSecond = getSupportFragmentManager().beginTransaction();
                         ftSecond.replace(R.id.frame_container, fragmentSecond);
                         ftSecond.commitAllowingStateLoss();
-                        setTitle("Frag Two");
+                        setTitle("Book search");
+                        dl.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.itemThree:
+                        Fragment fragmentThird = new ThirdFragment();
+                        FragmentTransaction ftThird = getSupportFragmentManager().beginTransaction();
+                        ftThird.replace(R.id.frame_container, fragmentThird);
+                        ftThird.commitAllowingStateLoss();
+                        setTitle("Book");
                         dl.closeDrawer(GravityCompat.START);
                         break;
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="Chethana Arunodh"
+        android:text=" Library System"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="chethana@gamil.com" />
+            android:text=" Distributed system" />
 
         <TextView
             android:id="@+id/version_text"
