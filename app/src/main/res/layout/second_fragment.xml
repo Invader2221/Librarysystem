@@ -9,7 +9,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Search by : "
+            />
 
         <RadioGroup
             android:id="@+id/radioGroup_role"
@@ -21,7 +30,7 @@
                 android:id="@+id/book_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:checked="true"
                 android:text="Book Title" />
 
@@ -29,14 +38,14 @@
                 android:id="@+id/book_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:text="Book Category" />
 
             <RadioButton
                 android:id="@+id/author_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:text="Author Name" />
 
         </RadioGroup>

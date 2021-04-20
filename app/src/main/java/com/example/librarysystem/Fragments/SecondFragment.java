@@ -119,6 +119,7 @@ public class SecondFragment extends Fragment implements ResponseHandler, BookLis
                         adapter = new BookListAdapter(getActivity(), tempArry);
                         adapter.setClickListener(SecondFragment.this);
                         listView.setAdapter(adapter);
+
                     } else if (String.valueOf(radioButton.getText()).equals("Book Category")) {
                         ArrayList<BookList> tempArry = new ArrayList<BookList>();
                         for (int i = 0; i < arrayList.size(); i++) {
