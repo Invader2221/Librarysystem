@@ -81,20 +81,13 @@ public class Login extends AppCompatActivity implements ResponseHandler {
     @Override
     public void serviceResponse(final JSONObject response, String tag) throws JSONException {
 
+        passField1 = (EditText) findViewById(R.id.login_password_input);
+        String password1 = response.get("password").toString();
+        String userName = response.get("userName").toString();
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                passField1 = (EditText) findViewById(R.id.login_password_input);
-
-                String userName = null;
-                String password1 = null;
-                try {
-                    password1 = response.get("password").toString();
-                    userName = response.get("userName").toString();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
                 if (progressDialog != null) {
                     if (progressDialog.isShowing()) {

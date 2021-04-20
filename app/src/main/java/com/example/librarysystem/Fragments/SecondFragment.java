@@ -1,6 +1,8 @@
-package com.example.librarysystem;
+package com.example.librarysystem.Fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,10 +16,11 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.librarysystem.R;
 import com.example.librarysystem.Utils.ResponseHandler;
-import com.example.librarysystem.Utils.Util;
 import com.example.librarysystem.Utils.WebService;
 
 import org.json.JSONException;
@@ -26,6 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.example.librarysystem.MainActivity.searchView;
+import static java.nio.file.Paths.get;
 
 public class SecondFragment extends Fragment implements ResponseHandler {
 
@@ -47,16 +51,39 @@ public class SecondFragment extends Fragment implements ResponseHandler {
         return inflater.inflate(R.layout.second_fragment, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        progressDialog = ProgressDialog.show(getContext(), "Please wait...", "Retrieving data ...", true);
+        WebService.book(responseHandler, authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies, progressDialog, getContext());
+
+//        String[] allbooks = {bookTitle.toString()};
+
+        // String authorId = get("authorId").toString();
+
+
+    }
+
+    @Override
+
+    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
+
+        String bookTitle = response.get("title 01").toString();
+        String authorId = response.get("").toString();
+        String isbn = response.get("").toString();
+
+
+        Activity view = null;
         listView = (ListView) view.findViewById(R.id.list_view_one);
         setHasOptionsMenu(true);
         for (int i = 0; i <= 100; i++) {
-            stringArrayList.add("Item " + i);
+            stringArrayList.add(isbn);
         }
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, stringArrayList);
+
 
         listView.setAdapter(adapter);
 
@@ -64,48 +91,14 @@ public class SecondFragment extends Fragment implements ResponseHandler {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getActivity()
-                        , adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
 
                 progressDialog = ProgressDialog.show(getContext(), "Please wait...", "Retrieving data ...", true);
                 WebService.book(responseHandler, authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies, progressDialog, getContext());
-            }
-        });
-    }
-
-    @Override
-
-    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
-
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-
-                String userName = null;
-                String password1 = null;
-                try {
-                    password1 = response.get("password").toString();
-                    userName = response.get("userName").toString();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (progressDialog != null) {
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
-                    }
-                }
-                if (userName != null) {
-                    Util.showDialog(getContext(), "Error!", "Username not found!");
-                } else {
-                    Toast.makeText(getContext(), "Successful login", Toast.LENGTH_LONG).show();
-
-
-                }
 
             }
         });
+
     }
 
     @Override

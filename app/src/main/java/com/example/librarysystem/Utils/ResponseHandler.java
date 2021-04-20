@@ -7,4 +7,5 @@ import java.io.Serializable;
 
 public interface ResponseHandler extends Serializable {
     public void serviceResponse(JSONObject response, String tag) throws JSONException;
+
 }

@@ -19,6 +19,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.librarysystem.Fragments.FirstFragment;
+import com.example.librarysystem.Fragments.SecondFragment;
+import com.example.librarysystem.Fragments.ThirdFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.example.librarysystem.Utils.Util.PREFS_NAME;
