@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import static com.example.librarysystem.MainActivity.searchView;
 
-public class SecondFragment extends Fragment implements ResponseHandler, BookListAdapter.ItemClickListener {
+public class BookSearchFragment extends Fragment implements ResponseHandler, BookListAdapter.ItemClickListener {
 
 
     String authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies;
@@ -117,7 +117,7 @@ public class SecondFragment extends Fragment implements ResponseHandler, BookLis
                             }
                         }
                         adapter = new BookListAdapter(getActivity(), tempArry);
-                        adapter.setClickListener(SecondFragment.this);
+                        adapter.setClickListener(BookSearchFragment.this);
                         listView.setAdapter(adapter);
 
                     } else if (String.valueOf(radioButton.getText()).equals("Book Category")) {
@@ -128,7 +128,7 @@ public class SecondFragment extends Fragment implements ResponseHandler, BookLis
                             }
                         }
                         adapter = new BookListAdapter(getActivity(), tempArry);
-                        adapter.setClickListener(SecondFragment.this);
+                        adapter.setClickListener(BookSearchFragment.this);
                         listView.setAdapter(adapter);
                     } else {
                         ArrayList<BookList> tempArry = new ArrayList<BookList>();
@@ -138,7 +138,7 @@ public class SecondFragment extends Fragment implements ResponseHandler, BookLis
                             }
                         }
                         adapter = new BookListAdapter(getActivity(), tempArry);
-                        adapter.setClickListener(SecondFragment.this);
+                        adapter.setClickListener(BookSearchFragment.this);
                         listView.setAdapter(adapter);
                     }
 

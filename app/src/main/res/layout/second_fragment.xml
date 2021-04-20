@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.SecondFragment">
+    tools:context=".Fragments.BookSearchFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,9 +19,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.librarysystem.Fragments.FirstFragment;
-import com.example.librarysystem.Fragments.SecondFragment;
-import com.example.librarysystem.Fragments.ThirdFragment;
+import com.example.librarysystem.Fragments.HomeFragment;
+import com.example.librarysystem.Fragments.BookSearchFragment;
+import com.example.librarysystem.Fragments.BookFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.example.librarysystem.Utils.Util.PREFS_NAME;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.itemOne:
-                        Fragment fragment = new FirstFragment();
+                        Fragment fragment = new HomeFragment();
                         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_container, fragment);
                         ft.commitAllowingStateLoss();
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.itemTwo:
-                        Fragment fragmentSecond = new SecondFragment();
+                        Fragment fragmentSecond = new BookSearchFragment();
                         FragmentTransaction ftSecond = getSupportFragmentManager().beginTransaction();
                         ftSecond.replace(R.id.frame_container, fragmentSecond);
                         ftSecond.commitAllowingStateLoss();
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.itemThree:
-                        Fragment fragmentThird = new ThirdFragment();
+                        Fragment fragmentThird = new BookFragment();
                         FragmentTransaction ftThird = getSupportFragmentManager().beginTransaction();
                         ftThird.replace(R.id.frame_container, fragmentThird);
                         ftThird.commitAllowingStateLoss();
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Fragment fragment = new FirstFragment();
+        Fragment fragment = new HomeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_container, fragment);
         ft.commitAllowingStateLoss();
