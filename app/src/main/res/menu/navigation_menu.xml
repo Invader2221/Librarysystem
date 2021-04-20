@@ -14,6 +14,10 @@
             android:id="@+id/itemThree"
             android:icon="@drawable/book_open_variant"
             android:title="Books" />
+        <item
+            android:id="@+id/itemFour"
+            android:icon="@drawable/person_icon"
+            android:title="Profile" />
 
     </group>
 

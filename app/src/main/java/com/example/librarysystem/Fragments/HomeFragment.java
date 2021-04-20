@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        view.findViewById(R.id.homeText).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.welcome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

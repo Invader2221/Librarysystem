@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.librarysystem.Fragments.HomeFragment;
 import com.example.librarysystem.Fragments.BookSearchFragment;
 import com.example.librarysystem.Fragments.BookFragment;
+import com.example.librarysystem.Fragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.example.librarysystem.Utils.Util.PREFS_NAME;
@@ -74,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
                         ftThird.replace(R.id.frame_container, fragmentThird);
                         ftThird.commitAllowingStateLoss();
                         setTitle("Book");
+                        dl.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.itemFour:
+                        Fragment fragmentFour = new ProfileFragment();
+                        FragmentTransaction ftFour = getSupportFragmentManager().beginTransaction();
+                        ftFour.replace(R.id.frame_container, fragmentFour);
+                        ftFour.commitAllowingStateLoss();
+                        setTitle("Profile");
                         dl.closeDrawer(GravityCompat.START);
                         break;
 
