@@ -48,7 +48,7 @@ public class BookSearchFragment extends Fragment implements ResponseHandler, Boo
             Bundle savedInstanceState
     ) {
 
-        View view = inflater.inflate(R.layout.second_fragment, container, false);
+        View view = inflater.inflate(R.layout.book_search_fragment, container, false);
         listView = (RecyclerView) view.findViewById(R.id.list_view_one);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup_role);
         setHasOptionsMenu(true);
