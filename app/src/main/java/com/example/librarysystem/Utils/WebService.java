@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,7 +69,7 @@ public class WebService {
                 try {
                     String jsonData = response.body().string();
                     JSONObject Jobject = new JSONObject(jsonData);
-                    res.serviceResponse(Jobject, "");
+                    res.serviceResponse(Jobject, null,"");
                 } catch (Exception e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
@@ -125,7 +126,7 @@ public class WebService {
                 try {
                     String jsonData = response.body().string();
                     JSONObject Jobject = new JSONObject(jsonData);
-                    res.serviceResponse(Jobject, jsonData);
+                    res.serviceResponse(Jobject, null,"SIGNUP");
                 } catch (Exception e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
@@ -186,8 +187,8 @@ public class WebService {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    JSONObject Jobject = new JSONObject(jsonData);
-                    res.serviceResponse(Jobject, jsonData);
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    res.serviceResponse(null, jsonArray, "BOOK_LIST");
                 } catch (Exception e) {
                     e.printStackTrace();
                     progressDialog.dismiss();

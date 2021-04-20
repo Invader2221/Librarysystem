@@ -17,6 +17,7 @@ import com.example.librarysystem.Utils.ResponseHandler;
 import com.example.librarysystem.Utils.Util;
 import com.example.librarysystem.Utils.WebService;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,7 +80,7 @@ public class Login extends AppCompatActivity implements ResponseHandler {
 
 
     @Override
-    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
+    public void serviceResponse(final JSONObject response,  JSONArray jsonArray, String tag) throws JSONException {
 
         passField1 = (EditText) findViewById(R.id.login_password_input);
         String password1 = response.get("password").toString();

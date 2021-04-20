@@ -19,6 +19,7 @@ import com.example.librarysystem.Utils.ResponseHandler;
 import com.example.librarysystem.Utils.Util;
 import com.example.librarysystem.Utils.WebService;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,7 +79,7 @@ public class Signup extends AppCompatActivity implements ResponseHandler {
     }
 
     @Override
-    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
+    public void serviceResponse(final JSONObject response, JSONArray jsonArray, String tag) throws JSONException {
 
         boolean result = response.getBoolean("result");
 

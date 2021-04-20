@@ -1,8 +1,6 @@
 package com.example.librarysystem.Fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,21 +13,21 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.librarysystem.BookList;
+import com.example.librarysystem.CustomAdapter;
 import com.example.librarysystem.R;
 import com.example.librarysystem.Utils.ResponseHandler;
 import com.example.librarysystem.Utils.WebService;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import static com.example.librarysystem.MainActivity.searchView;
-import static java.nio.file.Paths.get;
 
 public class SecondFragment extends Fragment implements ResponseHandler {
 
@@ -37,7 +35,7 @@ public class SecondFragment extends Fragment implements ResponseHandler {
     String authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies;
     ListView listView;
     ArrayList<String> stringArrayList = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    CustomAdapter customAdapter;
     ResponseHandler responseHandler = this;
     private ProgressDialog progressDialog;
 
@@ -47,57 +45,53 @@ public class SecondFragment extends Fragment implements ResponseHandler {
             Bundle savedInstanceState
     ) {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.second_fragment, container, false);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+        View view = inflater.inflate(R.layout.second_fragment, container, false);
+        listView = (ListView) view.findViewById(R.id.list_view_one);
+        setHasOptionsMenu(true);
 
         progressDialog = ProgressDialog.show(getContext(), "Please wait...", "Retrieving data ...", true);
         WebService.book(responseHandler, authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies, progressDialog, getContext());
 
-//        String[] allbooks = {bookTitle.toString()};
-
-        // String authorId = get("authorId").toString();
-
-
-    }
-
-    @Override
-
-    public void serviceResponse(final JSONObject response, String tag) throws JSONException {
-
-        String bookTitle = response.get("title 01").toString();
-        String authorId = response.get("").toString();
-        String isbn = response.get("").toString();
-
-
-        Activity view = null;
-        listView = (ListView) view.findViewById(R.id.list_view_one);
-        setHasOptionsMenu(true);
-        for (int i = 0; i <= 100; i++) {
-            stringArrayList.add(isbn);
-        }
-
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, stringArrayList);
-
-
-        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getActivity(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                customAdapter.getItem(position);
+                Toast.makeText(getActivity(), "csdsd", Toast.LENGTH_SHORT).show();
 
-                progressDialog = ProgressDialog.show(getContext(), "Please wait...", "Retrieving data ...", true);
-                WebService.book(responseHandler, authorId, availableCopies, bookCategory, bookEdition, bookTitle, boolPublisher, isbn, numOfCopies, progressDialog, getContext());
 
             }
         });
+
+        return view;
+    }
+
+    @Override
+
+    public void serviceResponse(final JSONObject response, JSONArray jsonArray, String tag) throws JSONException {
+
+        //  String bookTitle = "";
+        ArrayList<BookList> arrayList = new ArrayList<BookList>();
+        for (int i = 0; i <= jsonArray.length() - 1; i++) {
+            JSONObject objects = jsonArray.getJSONObject(i);
+            String bookTitle = objects.getString("bookTitle");
+            arrayList.add(new BookList(bookTitle, "sdfdf", "https://www.clker.com/cliparts/l/u/5/P/D/A/arrow-50x50-md.png"));
+        }
+        getActivity().runOnUiThread(() -> {
+
+             customAdapter = new CustomAdapter(getActivity(), arrayList);
+            //MyListAdapter adapter = new MyListAdapter(this, stringArrayList, "subtitle","https://www.clker.com/cliparts/l/u/5/P/D/A/arrow-50x50-md.png");
+
+            //adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, stringArrayList);
+            listView.setAdapter(customAdapter);
+            if (progressDialog != null) {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
+
 
     }
 
@@ -115,7 +109,9 @@ public class SecondFragment extends Fragment implements ResponseHandler {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                adapter.getFilter().filter(newText);
+               // if (adapter != null) {
+                  //  adapter.getFilter().filter(newText);
+               // }
 
                 return false;
             }
