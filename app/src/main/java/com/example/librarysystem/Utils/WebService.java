@@ -167,8 +167,7 @@ public class WebService {
         RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(LIBRARY_URL + "books/get")
-                .post(body)
+                .url(LIBRARY_URL + "books")
                 .build();
 
 
