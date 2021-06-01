@@ -165,7 +165,7 @@ public class WebService {
             e.printStackTrace();
         }
 
-        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+//        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(LIBRARY_URL + "books")

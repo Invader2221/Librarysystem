@@ -108,8 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         alertDialogBuilder.setTitle("Logout");
         alertDialogBuilder
