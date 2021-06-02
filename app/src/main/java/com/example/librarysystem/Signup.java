@@ -3,6 +3,7 @@ package com.example.librarysystem;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,8 +66,16 @@ public class Signup extends AppCompatActivity implements ResponseHandler {
                     Util.showDialog(Signup.this, "Error!", "Please enter username!");
                 } else if (email.equals("")) {
                     Util.showDialog(Signup.this, "Error!", "Please enter email!");
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    emailInput.setError("Please provide a valid email");
+                    emailInput.requestFocus();
+
                 } else if (password.equals("")) {
                     Util.showDialog(Signup.this, "Error!", "Please enter password!");
+                } else if (password.length() < 8) {
+                    pass.setError("Minimum length of password is 8 characters!");
+                    pass.requestFocus();
+
                 } else {
                     progressDialog = ProgressDialog.show(Signup.this, "Please wait...", "Retrieving data ...", true);
                     WebService.sigup(Signup.this, email, password, String.valueOf(radioButton.getText()), userName, progressDialog, Signup.this);

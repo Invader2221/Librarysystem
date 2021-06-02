@@ -53,7 +53,11 @@ public class Login extends AppCompatActivity implements ResponseHandler {
                     Util.showDialog(Login.this, "Error!", "Please enter username!");
                 } else if (password.equals("")) {
                     Util.showDialog(Login.this, "Error!", "Please enter password!");
-                } else {
+                } else if (password.length() < 8) {
+                    passField.setError("Minimum length of password is 8 characters!");
+                    passField.requestFocus();
+
+                }  else {
                     progressDialog = ProgressDialog.show(Login.this, "Please wait...", "Retrieving data ...", true);
                     WebService.login(Login.this, userName, password, progressDialog, Login.this);
 
