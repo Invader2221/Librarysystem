@@ -25,11 +25,12 @@ import static com.example.librarysystem.Utils.Util.PREFS_NAME;
 
 public class Login extends AppCompatActivity implements ResponseHandler {
 
-    String userName, password;
+    String userName, password, getUserName;
     TextView registerText;
     EditText userField, passField, passField1;
     Button btn_login;
     private ProgressDialog progressDialog;
+    public static final String MY_PREFS_NAME = "UserLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +108,9 @@ public class Login extends AppCompatActivity implements ResponseHandler {
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putBoolean("USER_LOGGED", true);
+//                    getUserName = userName;
+                    editor.putString("loggedUserName", userName);
+//                    intent.putExtra("userName",userName);
                     editor.apply();
                     startActivity(intent);
                     Login.this.finish();

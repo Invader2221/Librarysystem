@@ -47,10 +47,18 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         holder.categoryText.setText(bookList.getCategory());
         holder.authorText.setText(bookList.getAuthor());
 
-        Picasso.get().load(bookList.getImage())
-                .placeholder(R.drawable.ic_search)
-                .error(R.drawable.home_image)
-                .into(holder.profileImg);
+        if (bookList.getImage() == "") {
+
+            holder.profileImg.setImageResource(R.drawable.image_not_available);
+
+        } else {
+
+            Picasso.get().load(bookList.getImage())
+                    .placeholder(R.drawable.ic_search)
+                    .error(R.drawable.home_image)
+                    .into(holder.profileImg);
+
+        }
 
 
     }

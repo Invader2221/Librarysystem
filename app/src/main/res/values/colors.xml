@@ -23,5 +23,10 @@
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#c8e8ff</color>
 
+    <color name="profileBackground">#FFFFFF</color>
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="blackTextColor">#000</color>
+    <color name="Login">#003E70</color>
+
 
 </resources>
